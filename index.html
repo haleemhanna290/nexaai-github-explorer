@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="NexaAI GitHub Explorer helps you search, filter, and explore live GitHub repositories using the public GitHub REST API."
+    />
+    <title>NexaAI GitHub Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar container" aria-label="Main navigation">
+        <div class="brand" aria-label="NexaAI logo">
+          <div class="brand-mark">✦</div>
+          <span>NexaAI</span>
+        </div>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+        <div class="nav-menu" id="navMenu">
+          <a href="#home">Home</a>
+          <a href="#explorer">Explorer</a>
+          <a href="#about">About</a>
+        </div>
+
+        <button class="profile-btn" type="button" aria-label="Open profile">
+          Profile
+        </button>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="hero container">
+        <div class="hero-copy">
+          <p class="eyebrow">AI POWERED DEVELOPER EXPLORER</p>
+          <h1>Explore the World of Open Source</h1>
+          <p class="hero-text">
+            Discover GitHub repositories, explore technologies, and find projects
+            using the power of the GitHub REST API.
+          </p>
+
+          <div class="hero-actions">
+            <a class="primary-btn" href="#explorer">Explore Now</a>
+          </div>
+
+          <div class="hero-stats" aria-label="Project summary">
+            <div>
+              <strong>50k+</strong>
+              <span>Repos indexed</span>
+            </div>
+            <div>
+              <strong>24/7</strong>
+              <span>Live search</span>
+            </div>
+            <div>
+              <strong>AI</strong>
+              <span>Smart discovery</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-card code-window">
+            <div class="window-header">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="code-lines">
+              <span>const repo = "github";</span>
+              <span>const search = "react";</span>
+              <span>const result = discover(search);</span>
+            </div>
+          </div>
+
+          <div class="floating-badge badge-one">⚡ Fast</div>
+          <div class="floating-badge badge-two">🚀 Smart</div>
+          <div class="floating-badge badge-three">💡 Insight</div>
+        </div>
+      </section>
+
+      <section id="explorer" class="search-section container">
+        <div class="section-heading">
+          <p class="section-tag">GitHub Search</p>
+          <h2>Search GitHub Repositories</h2>
+          <p>
+            Find repositories by topic, technology, or project name.
+          </p>
+        </div>
+
+        <div class="search-panel">
+          <form id="searchForm" novalidate>
+            <div class="search-row">
+              <label class="sr-only" for="searchInput">Search repositories</label>
+              <input
+                id="searchInput"
+                type="text"
+                placeholder="Search repositories..."
+                aria-label="Search repositories"
+              />
+              <button type="submit" class="primary-btn">Search</button>
+              <button type="button" class="secondary-btn" id="clearButton">
+                Clear
+              </button>
+            </div>
+          </form>
+
+          <div class="example-searches" aria-label="Example searches">
+            <button class="chip" type="button" data-query="react">react</button>
+            <button class="chip" type="button" data-query="javascript">javascript</button>
+            <button class="chip" type="button" data-query="machine learning">
+              machine learning
+            </button>
+            <button class="chip" type="button" data-query="node">node</button>
+            <button class="chip" type="button" data-query="typescript">typescript</button>
+          </div>
+
+          <div class="filter-row">
+            <div class="field-group">
+              <label for="languageFilter">Filter by language</label>
+              <select id="languageFilter" aria-label="Filter repositories by language">
+                <option value="All">All</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="TypeScript">TypeScript</option>
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="sortSelect">Sort by</label>
+              <select id="sortSelect" aria-label="Sort repositories">
+                <option value="best_match">Best Match</option>
+                <option value="stars">Most Stars</option>
+                <option value="forks">Most Forks</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="statusMessage" class="status-message" aria-live="polite"></div>
+
+        <div class="results-header">
+          <h3 id="resultsInfo">Showing 0 repositories</h3>
+        </div>
+
+        <div id="repoGrid" class="repo-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="about" class="about-section">
+        <div class="container">
+          <div class="section-heading centered">
+            <p class="section-tag">About</p>
+            <h2>About NexaAI Explorer</h2>
+            <p>
+              NexaAI GitHub Explorer is a frontend application that demonstrates
+              how modern websites can communicate with public REST APIs and
+              display real-time data dynamically.
+            </p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <div class="feature-icon">📡</div>
+              <h3>Real-Time Data</h3>
+              <p>Retrieve live repository information from GitHub.</p>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-icon">🔎</div>
+              <h3>Smart Search</h3>
+              <p>Search repositories using keywords and technologies.</p>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-icon">⚙️</div>
+              <h3>Dynamic Interface</h3>
+              <p>Update the interface automatically based on API results.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <h3>NexaAI</h3>
+          <p>Explore. Discover. Build.</p>
+        </div>
+
+        <ul class="footer-links" aria-label="Footer links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#explorer">Explorer</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+
+      <div class="copyright">© 2026 NexaAI. All rights reserved.</div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
